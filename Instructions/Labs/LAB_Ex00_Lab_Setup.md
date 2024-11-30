@@ -19,8 +19,8 @@ lab:
 **任务**：
 
 - 在 Microsoft Purview 门户中启用审核
-- 在 Microsoft Teams 中启用按名称搜索
-- 在 SharePoint Online 和 OneDrive 中启用信息障碍
+- 分配合规性角色
+- 浏览 Microsoft Purview 门户
 
 ## 任务 – 在 Microsoft Purview 门户中启用审核
 
