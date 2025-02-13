@@ -1,3 +1,11 @@
+#README
+
+We've turned off the ability to report issues directly on this repo and do not monitor PRs.
+
+Provide feedback here: https://aka.ms/provide-feedback
+
+Or, if you are a trainer with a microsoft.com email address, please create a ticket in AzDO.
+
 # 使用 Microsoft Purview 实现信息保护和数据丢失防护
 
 - **[实验室的链接（HTML 格式）](https://microsoftlearning.github.io/SC-5003_Information-protection-and-Data-Loss-Prevention/)**
