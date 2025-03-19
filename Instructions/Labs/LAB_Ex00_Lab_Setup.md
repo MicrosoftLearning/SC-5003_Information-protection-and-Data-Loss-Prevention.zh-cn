@@ -40,6 +40,19 @@ lab:
 
 1. 选择此选项后，蓝色栏应从此页面消失。
 
+>[!alert] 如果在本练习中启用审核时收到错误，请使用以下步骤来解决此问题：
+>1. 通过右键单击 Windows 按钮打开提升的终端窗口，然后选择终端（管理员）。
+>1. 通过运行 `Install-Module -Name ExchangeOnlineManagement` 来安装 ExchangeOnlineManagement 模块
+>1. 通过运行 `Connect-ExchangeOnline` 连接到 ExchangeOnlineManagement
+>1. 出现提示时，通过输入实验室托管提供商的管理员用户名和密码登录。
+>1. 要验证是否已启用审核，请运行 `Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled`
+>1. 如果为 false，则关闭审核日志。
+>1. 要启用审核，请运行 `Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true`
+>   1. 如果收到无法在组织中运行脚本的错误信息，请运行 `Enable-OrganizationCustomization`
+>   1. 重试运行 `Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true`
+>1. 要确认已启用审核，请运行 `Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled`
+>1. 完成后，运行 `Disconnect-ExchangeOnline` 以结束会话
+
 已在 Microsoft 365 中成功启用审核。
 
 ## 任务 – 分配合规性角色
