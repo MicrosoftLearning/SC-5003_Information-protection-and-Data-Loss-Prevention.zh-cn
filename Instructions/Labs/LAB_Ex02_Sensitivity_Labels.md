@@ -17,71 +17,19 @@ lab:
 
 ## 任务 1 – 在 SharePoint 和 OneDrive 中启用对敏感度标签的支持
 
-在此任务中，你将安装必要的模块，并在租户上启用对敏感度标签的支持。 本练习稍后部分应用敏感度标签的可选任务需要这样做。
+在此任务中，你将为敏感度标签启用共同创作，这也为 SharePoint 和 OneDrive 中的文件启用敏感度标签。
 
-1. 在桌面上，右键单击任务栏中的 Windows 按钮，然后选择“**终端 (管理员)**”，打开提升的 PowerShell 窗口。
+1. 打开 **Microsoft Edge**，然后导航到 `https://purview.microsoft.com`。
 
-1. 选择“是”确认“用户帐户控制”窗口 。
+1. 在左侧导航中，选择“**设置**” > “**信息保护**”。
 
-1. 运行 **Install-Module** cmdlet，以安装最新版 MS Online PowerShell 模块：
+1. 在“**信息保护设置**”页上，确保你处于“**为使用敏感度标签的文件启用共同创作**”选项卡上。
 
-    ```powershell
-    Install-Module -Name MSOnline
-    ```
+1. 选中“**为使用敏感度标签的文件打开共同创作**”复选框。
 
-1. 输入表示“是”的 Y 并按 Enter 键以确认“NuGet 安全性”对话框以及“不受信任的存储库安全”对话框。 这可能需要一段时间才能处理完成。
+1. 在屏幕底部，选择“**应用**”。
 
-1. 运行 **Install-Module** cmdlet，以安装最新版本的 Sharepoint Online PowerShell 模块：
-
-    ```powershell
-    Install-Module -Name Microsoft.Online.SharePoint.PowerShell
-    ```
-
-1. 输入表示“是”的 Y 并按 Enter 键，以确认“不受信任的存储库安全”对话框。
-
-1. 运行 **Connect-MsolService** 以连接到 MS Online 服务：
-
-    ```powershell
-    Connect-MsolService
-    ```
-
-1. 在“**登录到帐户**”窗体中，以你在上一练习中选作**合规性管理员**的用户身份登录。
-
-1. 登录后，导航回终端窗口。
-
-1. 运行 **Get-Msoldomain** cmdlet 并将域另存为变量：
-
-    ```powershell
-    $domain = get-msoldomain
-    ```
-
-1. 使用在上一步中创建的 _$domain_ 变量为 _$adminurl_ 创建新变量：
-
-    ```powershell
-    $adminurl = "https://" + $domain.Name.split('.')[0] + "-admin.sharepoint.com"
-    ```
-
-1. 使用在上一步中创建的 _$adminurl_ 变量运行 **Connect-SPOService** cmdlet：
-
-    ```powershell
-    Connect-SPOService -url $adminurl
-    ```
-
-1. 在“**登录到帐户**”窗体中，以**全局管理员**身份登录。
-
-1. 登录后，导航回终端窗口。
-
-1. 运行 **Set-SPOTenant** cmdlet，以启用对敏感度标签的支持：
-
-    ```powershell
-    Set-SPOTenant -EnableAIPIntegration $true
-    ```
-
-1. 输入表示“是”的 Y 并按 Enter 键，以确认更改。
-
-1. 关闭 PowerShell 窗口。
-
-你已为 Teams 和 SharePoint 网站成功启用对敏感度标签的支持。
+你已为 SharePoint 和 OneDrive 中的文件成功启用对敏感度标签的支持。
 
 ## 任务 2 - 创建敏感度标签
 
