@@ -114,6 +114,14 @@ lab:
 
 1. 在桌面上，右键单击任务栏中的 Windows 按钮，然后选择“**终端 (管理员)**”，打开提升的 PowerShell 窗口。
 
+1. 在终端窗口中运行“**安装模块**”cmdlet，以安装最新的 **Exchange Online PowerShell** 模块版本：
+
+    ```powershell
+    Install-Module ExchangeOnlineManagement
+    ```
+
+1. 输入表示“是”的 Y 并按 Enter 键，以确认“不受信任的存储库安全”对话框 。  此过程可能需要一段时间才能完成。
+
 1. 运行 **Connect-IPPSSession** cmdlet 以连接到安全性和合规性 PowerShell：
 
    ```powershell
