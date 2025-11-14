@@ -24,11 +24,17 @@ lab:
 
 ## 任务 – 在 Microsoft Purview 门户中启用审核
 
-在此任务中，你将在 Microsoft Purview 门户中启用“审核”以监视门户活动。 对于这些实验室中的练习，需要进行审核才能创建自动标记策略。
+在此任务中，你将在 Microsoft Purview 门户中启用“审核”以监视门户活动。
 
-1. 在 Microsoft Edge 中，导航到 Microsoft Purview 门户 `https://purview.microsoft.com`，并以拥有**全局管理员**权限的用户身份登录。
+1. 使用管理员**** 帐户登录到客户端 1 VM (SC-401-CL1)。
 
-1. 有关新的 Microsoft Purview 门户的消息将显示在屏幕上。 选择同意数据流披露条款和隐私声明的选项，然后选择“**立即试用**”。
+1. 打开 Microsoft Edge。
+
+1. 在 Microsoft Edge**** 中，导航到`https://purview.microsoft.com`，并以 MOD 管理员****`admin@WWLxZZZZZZ.onmicrosoft.com` 的身份（其中 ZZZZZZ 是实验室托管提供商提供的唯一租户前缀）登录。 管理员的密码应由实验室托管提供程序提供。
+
+1. 在 Microsoft Edge 中，导航到 Microsoft Purview 门户，`https://purview.microsoft.com`，然后登录。
+
+1. 有关新的 Microsoft Purview 门户的消息将显示在屏幕上。 选择“**开始使用**”以访问新门户。
 
     ![显示“欢迎使用新的 Microsoft Purview 门户屏幕”的屏幕截图。](../Media/welcome-purview-portal.png)
 
@@ -40,18 +46,57 @@ lab:
 
 1. 选择此选项后，蓝色栏应从此页面消失。
 
->[!alert] 如果在本练习中启用审核时收到错误，请使用以下步骤来解决此问题：
->1. 通过右键单击 Windows 按钮打开提升的终端窗口，然后选择终端（管理员）。
->1. 通过运行 `Install-Module -Name ExchangeOnlineManagement` 来安装 ExchangeOnlineManagement 模块
->1. 通过运行 `Connect-ExchangeOnline` 连接到 ExchangeOnlineManagement
->1. 出现提示时，通过输入实验室托管提供商的管理员用户名和密码登录。
->1. 要验证是否已启用审核，请运行 `Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled`
->1. 如果为 false，则关闭审核日志。
->1. 要启用审核，请运行 `Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true`
->   1. 如果收到无法在组织中运行脚本的错误信息，请运行 `Enable-OrganizationCustomization`
->   1. 重试运行 `Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true`
->1. 要确认已启用审核，请运行 `Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled`
->1. 完成后，运行 `Disconnect-ExchangeOnline` 以结束会话
+    >[!Note] **注意:前提是“审核”按钮不启用日志记录**
+    >
+    >在一些租户中，选择“开始记录用户和管理员活动”**** 可能不会激活审核。  
+    >
+    >如果出现这种情况，你可以改为通过 PowerShell 启用审核：
+    >
+    >1. 通过右键单击 Windows 按钮打开提升的终端窗口，然后选择“终端 (管理员)”****。  
+    >
+    >1. 安装最新的 Exchange Online PowerShell**** 模块：
+    >
+    >     ```powershell
+    >     Install-Module ExchangeOnlineManagement
+    >     ```
+    >
+    >     键入“Y”**** 表示“是”并按“Enter”**** 来确认任何提示。
+    >
+    >1. 输入以下命令，更改执行策略：
+    >
+    >     ```powershell
+    >     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+    >     ```
+    >
+    >1. 关闭提升的终端窗口并打开一个常规 PowerShell 会话。
+    >
+    >1. 连接到 Exchange Online：
+    >
+    >     ```powershell
+    >     Connect-ExchangeOnline
+    >     ```
+    >
+    >    以`admin@WWLxZZZZZZ.onmicrosoft.com` 身份登录（其中 ZZZZZZ 是实验室托管提供商的唯一租户前缀）。 管理员的密码应由实验室托管提供程序提供。
+    >
+    >1. 检查是否已启用审核：
+    >
+    >     ```powershell
+    >     Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled
+    >     ```
+    >
+    >    如果返回 False**__**，请启用审核功能：
+    >
+    >     ```powershell
+    >     Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true
+    >     ```
+    >
+    >1. 验证现在已启用它：
+    >
+    >     ```powershell
+    >     Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled
+    >     ```
+    >
+    >    审核功能处于活动状态后，该命令应返回 True**__**。
 
 已在 Microsoft 365 中成功启用审核。
 
@@ -59,7 +104,7 @@ lab:
 
 在此任务中，你会将**合规性管理员**角色分配给这些实验室练习中涉及到的用户。
 
-1. 在 **Microsoft Edge** 中，导航到 Microsoft 365 管理中心。`https://admin.microsoft.com` 你需要以具有**全局管理员**权限的用户身份登录。
+1. 在**Microsoft Edge** 中，导航到 Microsoft 365 管理中心。`https://admin.microsoft.com` 你需要以具有**全局管理员**权限的用户身份登录。
 
 1. 在左侧边栏中，展开“**用户**”，然后选择“**活动用户**”。
 
@@ -83,7 +128,7 @@ lab:
 
 在此任务中，你将以之前授予**合规性管理员**角色的用户身份登录，以浏览 Microsoft Purview 门户。 在后续实验室和练习中，此角色将称为**合规性管理员**。
 
-1. 在“Microsoft Edge”中，导航到 `https://purview.microsoft.com`。
+1. 在“Microsoft Edge”中，导航到`https://purview.microsoft.com`。
 
 1. 显示“选择帐户”窗口时，请选择“使用其他帐户” 。
 
